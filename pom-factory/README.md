@@ -11,8 +11,8 @@
 - При изменении локатора нужно менять во всех тестах.
 - Сложно поддерживать при росте количества тестов.
 
-## Решение с применением паттернов Page Object Model + Page Factory
-[Решение с применением паттерна](src/test/java/login/LoginTestWithPOMAndFactory.java)
+# Решение с применением паттернов Page Object Model + Page Factory
+[Решение с применением паттерна](src/test/java/login/LoginTestWithoutPageFactory.java)
 
 ## ✅ Плюсы:
 - Логика работы со страницей вынесена в отдельный класс. 
@@ -21,9 +21,11 @@
 - Легко обновлять локаторы — достаточно поменять их в одном месте.
 
 # Про паттерн Factory
-**Factory** — паттерн для создания объектов. Он позволяет создавать объекты, не раскрывая логику создания. Например, вместо new LoginPage()
-мы 
-используем "фабричный" метод:  
+**Factory** — паттерн для создания объектов. Он позволяет создавать объекты, не раскрывая логику создания. 
+
+##  Пример 1: Page Factor
+Когда нужно создать экземпляр класса `LoginPage`, вместо new LoginPage() мы используем "фабричный" метод:
+
 ```java
 PageFactory.initElements(driver, new LoginPage());
 ```
@@ -63,7 +65,62 @@ usernameField.setValue("user");
 3. **Централизованное управление локаторами**
    Все локаторы сосредоточены в одном месте — в классе страницы. Если интерфейс изменился, достаточно обновить один файл, а не искать локаторы во всех тестах.
 
-## Где еще может пригодиться?
+## Пример 2: Фабрика по созданию транспорта
+В приложении есть разные виды транспорта. Мы хотим создавать объекты транспорта в зависимости от типа. 
+Для этого нам необходимо:
+1. Создать интерфейс `Transport`:
+2. 
+```java
+public interface Transport {
+    void start();
+}
+```
+2. Создать конкретные реализации `Car`, `Bus`:
+```java
+public class Car implements Transport {
+    @Override
+    public void start() {
+        System.out.println("Car started");
+    }
+}
+
+public class Bus implements Transport {
+    @Override
+    public void start() {
+        System.out.println("Bus started");
+    }
+}
+```
+3. Создать Enum с типами транспорта:
+```java
+public enum TransportType {
+    CAR, BUS;
+}
+```
+4. Создать фабрику `TransportFactory`, которая будет возвращать объекты конкретных транспорта в зависимости от типа:
+```java
+public class TransportFactory {
+    public static Transport getTransport(TransportType type) {
+        switch (type) {
+            case CAR:
+                return new Car();
+            case BUS:
+                return new Bus();
+            default:
+                throw new IllegalArgumentException("Unknown transport type");
+        }
+    }
+}
+```
+5. Использовать фабрику для создания объектов транспорта:
+```java
+public class App {
+    public static void main(String[] args) {
+        Transport car = TransportFactory.getTransport(TransportType.CAR);
+        car.start();
+```
+
+# Где еще может пригодиться?
 - Создание Factory с WebDriver для запуска тестов в разных браузерах.
 - Для API тестов если нужно создать клиенты для отправки запросов в разных тестовых средах(dev, stage).
 - Factory для загрузки различных конфигов, например из config.properties  `AppConfig config = ConfigFactory.loadConfig();`

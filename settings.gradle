@@ -1,3 +1,4 @@
 rootProject.name = 'automation-patterns'
 include 'pom-factory'
+include 'loadable-component'
 
