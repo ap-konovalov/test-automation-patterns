@@ -1,11 +1,11 @@
 package ru.nmt.pages;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.LoadableComponent;
+import ru.nmt.LoadableComponent;
 
-// Наследуемся от абстрактного класса Selenium - LoadableComponent
 public class LoginPageWithPattern extends LoadableComponent<LoginPageWithPattern> {
 
     @FindBy(css = "[aria-label='Логин']")
@@ -26,8 +26,15 @@ public class LoginPageWithPattern extends LoadableComponent<LoginPageWithPattern
 
     @Override
     protected void load() {
+        Selenide.open("https://private.auth.alfabank.ru/passport/cerberus-mini-blue/dashboard-blue/username?response_type=code&client_id" +
+                              "=newclick" +
+                              "-web&scope=openid%20newclick-web&acr_values=phone_auth :sms&non_authorized_user=true");
     }
 
+    // ✅Явная проверка загрузки страницы/компонента.
+    // ✅Централизация логики проверки состояния страницы.
+    // ✅Упрощение тестов: тесты работают стабильнее и чище.
+    // ✅Лучшая поддерживаемость и переиспользование кода.
     @Override
     protected void isLoaded() {
         userNameField.shouldBe(Condition.visible);

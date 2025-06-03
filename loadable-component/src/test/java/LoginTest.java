@@ -16,6 +16,7 @@ public class LoginTest {
         HomePage homePage = Selenide.page(LoginPage.class).login("user123", "password");
 
         // ❌ Эту проверку нужно будет дублировать везде, где хотим проверить что страница загрузилась
+        // ❌ Риск падения теста из-за того что пошли проверять пока страница еще не загрузилась.
         assertTrue(homePage.isPageTitleDisplayed());
     }
 }
