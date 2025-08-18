@@ -9,8 +9,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/composite-page-element" />
             <option value="$PROJECT_DIR$/loadable-component" />
             <option value="$PROJECT_DIR$/pom-factory" />
+            <option value="$PROJECT_DIR$/strategy" />
           </set>
         </option>
       </GradleProjectSettings>

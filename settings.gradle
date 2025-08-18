@@ -1,4 +1,6 @@
 rootProject.name = 'automation-patterns'
 include 'pom-factory'
 include 'loadable-component'
+include 'composite-page-element'
+include 'strategy'
 
