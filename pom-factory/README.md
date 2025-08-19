@@ -111,7 +111,7 @@ public class App {
 ![Страница логина](images/loginPage.png) 
 
 # Решение без применения паттерна
-[Решение без применения паттерна](src/test/java/login/LoginTestWithoutFactory.java)
+[Решение без применения паттерна](src/test/java/login/LoginTest.java)
 
 ## ❌ Минусы:
 
@@ -120,7 +120,7 @@ public class App {
 - Сложно поддерживать при росте количества тестов.
 
 # Решение с применением паттернов Page Object Model + Page Factory
-[Решение с применением паттерна](src/test/java/login/LoginTestWithoutPageFactory.java)
+[Решение с применением паттерна](src/test/java/login/LoginTestWithPOMAndFactory.java)
 
 ## ✅ Плюсы:
 - Логика работы со страницей вынесена в отдельный класс. 
