@@ -3,4 +3,8 @@ include 'pom-factory'
 include 'loadable-component'
 include 'composite-page-element'
 include 'strategy'
+include 'decorator'
+include 'object-mother'
+//include 'screenplay'
+//include 'step-definition'
 

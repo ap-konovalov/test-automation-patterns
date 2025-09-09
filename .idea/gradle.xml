@@ -10,8 +10,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/composite-page-element" />
+            <option value="$PROJECT_DIR$/decorator" />
             <option value="$PROJECT_DIR$/loadable-component" />
+            <option value="$PROJECT_DIR$/object-mother" />
             <option value="$PROJECT_DIR$/pom-factory" />
+            <option value="$PROJECT_DIR$/screenplay" />
+            <option value="$PROJECT_DIR$/step-definition" />
             <option value="$PROJECT_DIR$/strategy" />
           </set>
         </option>
