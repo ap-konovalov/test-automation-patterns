@@ -16,7 +16,7 @@
 
 # Решение без применения паттерна
 
-[PostPetTests.java](src/test/java/PostPetTests.java)
+[PostStoreOrderTests.java](src/test/java/PostStoreOrderTests.java)
 
 ## ❌ Минусы:
 
