@@ -3,7 +3,9 @@
 **Step Definition** - это способ организации автотестов, при котором все действия пользователя или шаги API-запросов выносятся в отдельный
 класс (или классы). Эти классы называются "Steps" (шаги), и они описывают, что именно делает пользователь или тест — но не как.
 Простыми словами: тест становится похож на пошаговую инструкцию, а детали реализации этих шагов спрятаны отдельно. Это делает тесты более 
-читаемыми и легкими в поддержке.
+читаемыми и легкими в поддержке. <br>
+Step Definition - это часть BDD (Behavior-Driven Development). Используется в таких инструментах, как Cucumber или JBehave. Сценарии 
+пишутся на языке Gherkin (читаемый для человека), а Step Definitions — это Java-методы, которые реализуют, что происходит при выполнении шагов.
 
 ## Когда использовать?
 В UI-тестах: действия пользователя — это шаги, которые можно вынести отдельно<br>
@@ -11,14 +13,14 @@ API-тесты: вызовы API и проверки — это шаги
 
 # Задача
 
-Необходимо написать автотесты на REST API интернет магазина животных. Конкретно на метод POST /addPet из [документации по ссылке](https://petstore.swagger.io/#/pet/addPet).
-При тестировании необходимо убедиться, что метод POST /addPet действительно создал питомца. Для этого необходимо вызвать метод [GET 
+Необходимо написать автотесты на REST API интернет магазина животных. Конкретно на метод POST /add из [документации по ссылке](https://petstore.swagger.io/#/pet/addPet).
+При тестировании необходимо убедиться, что метод POST /add действительно создал питомца. Для этого необходимо вызвать метод [GET 
 /getPetById](https://petstore.swagger.io/#/pet/getPetById) и сверить имя созданного питомца. 
 
 
 # Решение без применения паттерна
 
-[PostStoreOrderTests.java](src/test/java/PostStoreOrderTests.java)
+[PostPetTests.java](src/test/java/PostPetTests.java)
 
 ## ❌ Минусы:
 - Логика запроса и проверки размазана по тесту
@@ -36,11 +38,18 @@ API-тесты: вызовы API и проверки — это шаги
 
 # Как реализовать паттерн
 
-Вынести шаги по работе с питомцами в отдельный класс [PetSteps.java](src/main/java/ru/nmt/steps/PetSteps.java)
+1) Подключаем библиотеку для работы с Gherkin 
+```java
+    testImplementation("io.cucumber:cucumber-java:7.23.0")
+    testImplementation("io.cucumber:cucumber-junit:7.23.0")
+```
+2) Вынести шаги по работе с питомцами (Step Definitions) в отдельный класс [PetSteps.java](src/test/java/pet_store/StepDefinitions.java)
+3) Написать сценарий теста на языке Gherkin [CreatePet.feature](src/test/resources/pet_store/CreatePet.feature)
 
 # Решение с применением паттерна
 
-[PostPetWithStepDefinitionTests.java](src/test/java/PostPetWithStepDefinitionTests.java)
+[PetSteps.java](src/test/java/pet_store/StepDefinitions.java)
+[CreatePet.feature](src/test/resources/pet_store/CreatePet.feature)
 
 ## ✅ Плюсы:
 
@@ -51,11 +60,11 @@ API-тесты: вызовы API и проверки — это шаги
 
 ## ❌ Минусы:
 
-В некотором смысле нарушается принцип Single Responsibility Principle (SRP). В классе PetSteps.java появляются методы связанные и с 
+В некотором смысле нарушается принцип Single Responsibility Principle (SRP). В классе StepDefinitions.java появляются методы связанные и с 
 Arrange и с Act и с Assert.<br>
 
 ### Что делать, чтобы не нарушать принцип SPR?
-Начинаем выноси части из класса PetSteps.java в отдельные классы:
+Начинаем выноси части из класса StepDefinitions.java в отдельные классы:
 - Если шаги становятся сложными или повторяются,
 - Если класс разрастается и в нем становится сложно ориентироваться.
 

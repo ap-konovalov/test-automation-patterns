@@ -7,5 +7,6 @@ include 'decorator'
 include 'object-mother'
 include 'screenplay'
 include 'step-definition'
-//include 'dependency-injection'
+include 'dependency-injection'
+include 'facade'
 

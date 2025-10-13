@@ -11,12 +11,12 @@
 
 # Задача
 
-Необходимо написать автотесты на REST API интернет магазина животных. Конкретно на метод POST /addPet
+Необходимо написать автотесты на REST API интернет магазина животных. Конкретно на метод POST /add
 из [документации по ссылке](https://petstore.swagger.io/#/pet/addPet).
 
 # Решение без применения паттерна
 
-[PostStoreOrderTests.java](src/test/java/PostStoreOrderTests.java)
+[hardcoded_tests.PostStoreOrderTests.java](src/test/java/hardcoded_tests.PostStoreOrderTests.java)
 
 ## ❌ Минусы:
 
