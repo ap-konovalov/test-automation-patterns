@@ -15,7 +15,7 @@ public class GetRocketWithDecoratorTest {
     void getRocketInfo() {
         String rocketId = "falcon9";
         RocketInfoResponseDto response = spaceXApiClientWithDecorators.getRocketInfo(rocketId);
-        assertEquals(rocketId, response.rocket_id(), "RocketId в запросе и ответе не совпадают");
+        assertEquals(rocketId, response.rocketId(), "RocketId в запросе и ответе не совпадают");
     }
 
     private static ApiClient createClientWithDecorators(boolean isLogDecoratorEnabled, boolean isRetryDecoratorEnabled) {

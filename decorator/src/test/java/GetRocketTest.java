@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.nmt.dto.RocketInfoResponseDto;
 
-import java.util.function.Supplier;
-
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +20,7 @@ public class GetRocketTest {
     }
 
     @Test
-    void getRocketInfo() throws InterruptedException {
+    void getRocketInfo() {
 //        ❌ Повторение логики логирования в каждом тесте.
 //        ❌ Если нужно изменить формат логов — придется менять везде
 //        ❌ Тесты становятся «шумными» — много лишнего кода, не относящегося к сути теста.
@@ -41,6 +39,6 @@ public class GetRocketTest {
 
         System.out.println("[INFO] Получен ответ на запрос: %s".formatted(response));
 
-        assertEquals(ROCKET_ID, response.rocket_id(), "RocketId в запросе и ответе не совпадают");
+        assertEquals(ROCKET_ID, response.rocketId(), "RocketId в запросе и ответе не совпадают");
     }
 }
